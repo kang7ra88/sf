@@ -1,0 +1,11 @@
+<ul data-role="listview" data-filter="true" data-theme="d" data-divider-theme="d" data-filter-placeholder="Search existing questions or feedback">
+    <% @fish.each do |fish| %>
+        <li><%= link_to fish do %>
+            <h3><%= fish.title %></h3>
+            <p><strong><%= fish.category %></strong></p>
+            <p><%= truncate(fish.body, :length => 150) %></p>
+            <p class="ui-li-aside"><strong><%= fish.status %></strong></p>
+            <% end %>
+        </li>
+    <% end %>
+</ul>

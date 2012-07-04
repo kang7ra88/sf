@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title>StarFish</title>
+	<meta{ name: :viewport, content: 'width=device-width, initial-scale=1'}>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<div data-role="page" rel="external" or data-ajax="false">	
+		<div data-role="header" data-theme="b">
+			<h1>Starfish</h1>
+			<%= link_to "Home", fish_index_path, "data-icon" => "home", "data-iconpos" => "notext", "data-role" => "button" %>
+			<%= link_to "Search", fish_index_path, "data-icon" => "search", "data-iconpos" => "notext", "data-role" => "button" %>
+		
+		<% if user_signed_in? %>
+			<div data-role="navbar">
+				<ul>
+					<li><%= link_to 'New Fish', new_fish_path %></li>
+					<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+				</ul>
+			</div>
+		</div>
+		<div class="ui-bar ui-bar-d">
+			<% if alert != nil || notice != nil %>
+				<h1><%= alert %><%= notice %></h1>
+			<% else %>
+				<h1 class="right">Signed in as <%= current_user.email %></h1>
+			<% end %>
+		</div>
+	
+		<% else %>
+			<div data-role="navbar">
+				<ul>
+					<li><%= link_to "Sign Up", new_user_registration_path, "data-role" => "button", "data-theme" => "b", "data-shadow" => "true" %>  </li>
+					<li><%= link_to "Sign In", new_user_session_path, "data-role" => "button", "data-theme" => "b", "data-shadow" => "true" %> </li>
+				</ul>
+			</div>
+		</div>
+		<div class="ui-bar ui-bar-d">
+			<% if alert != nil || notice != nil %>
+				<h1><%= alert %><%= notice %></h1>
+			<% else %>
+				<h1>Please sign in to create new Fish</h1>
+			<% end %>
+		</div>
+		<% end %>
+		
+		<div data-role="content">
+			<div class="content-primary">
+				<%= yield %>
+			</div>
+		</div>
+		<!--
+		<div data-role="footer" data-theme="b">
+			<h3>&copy;2012 SingTel<h1>
+		</div>-->
+	</div>
+</body>
+</html>

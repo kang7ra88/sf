@@ -1,0 +1,45 @@
+<%= form_for(@fish) do |f| %>
+  <% if @fish.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this fish from being saved:</h2>
+
+      <ul>
+      <% @fish.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div data-role="fieldcontain">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div data-role="fieldcontain">
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <div data-role="fieldcontain">
+      <label for="fish_category" class="select">Category</label>
+      <select name="fish[category]" id="fish_category" data-native-menu="false">
+        <option>Please choose a category</option>
+        <option value="Question">Question</option>
+        <option value="Feedback">Feedback</option>
+      </select>
+    </div>
+  <div data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <legend>Status</legend>
+      <input type="radio" name="fish[status]" id="fish_status_1" value="Open" checked="checked" />
+      <label for="fish_status_1">Open</label>
+      <input type="radio" name="fish[status]" id="fish_status_2" value="Closed" />
+      <label for="fish_status_2">Closed</label>
+    </fieldset>
+  </div>
+  <div class="ui-body ui-body-b">
+  <fieldset class="ui-grid-a">
+      <div class="ui-block-a"><%= button_to "Cancel", fish_index_path, "data-theme" => "d" %></div>
+      <div class="ui-block-b"><%= f.submit %></div>
+    </fieldset>
+  </div>
+<% end %>
